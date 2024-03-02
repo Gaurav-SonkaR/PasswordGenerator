@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Self password generator.........
+        </title>   
+        <style>
+            body{
+                background-color: black;
+			color: red;
+			text-align: center;
+		    }
+            #number{
+                width: 40%;
+            }
+            table{
+                margin-left: auto; 
+                margin-right: auto;
+            }
+            td{
+                height: 50%;
+            }
+            .line{
+                color: aqua;
+                font-size: 20px;
+            }
+            button{
+                border-radius: 8px;
+                size: 80px;
+                background-color: aquamarine;
+            }
+            #result{
+                color: aliceblue;
+            }
+            p{
+                color: aquamarine;
+            }
+        </style>    
+    </head>
+    <body>
+        <h1>-----: My Password Generator :-----</h1>
+        <p class="line">----------------------------------------------------</p>
+        <table>
+            <tr>
+                <td><p>Password Length : </p></td>
+                <td><input type="number" name="number" id="number" placeholder="e.g : 8"></td>
+            </tr>
+            <tr>
+                <td><p>UpperCase : </p></td>
+                <td><input type="checkbox" value="uppercase" class="Checker"></td>
+            </tr>
+            <tr>
+                <td><p>LowerCase : </p></td>
+                <td><input type="checkbox" value="lowercase" class="Checker"></td>
+            </tr>
+            <tr>
+                <td><p>Digit : </p></td>
+                <td><input type="checkbox" value="digit" class="Checker"></td>
+            </tr>
+            <tr>
+                <td><p>Special Character : </p></td>
+                <td><input type="checkbox" value="specialcharacter" class="Checker"></td>
+            </tr>
+        </table>
+        <button onclick="password()">Click for password</button>
+        <p class="line">----------------------------------------------------</p>
+        <h2 id="result"></h2>
+        <p class="line">----------------------------------------------------</p>
+    </body>
+    <script>
+        
+        function password(){
+            let checkboxs = document.getElementsByClassName('Checker');
+            let length =  document.getElementById('number').value;
+            let result="";
+            let count = 0;
+            
+            while(count<length)
+            {
+                let ch="";
+                let sel = Math.floor(Math.random() * 10);
+                sel%=4;
+                
+                switch (sel) {
+                    case 0:
+                        if(checkboxs[0].checked) // uppercase
+                        {
+                            let num = Math.floor(Math.random() * 90 + 3) + 33;
+                            count++;
+                            if(num>=65 && num<=90)
+                            { 
+                                ch = String.fromCharCode(num);
+                                result +=ch;
+                            }
+                            else
+                                count--;
+                        }                        
+                        break;
+                    case 1:
+                        if(checkboxs[1].checked) // lower case
+                        {
+                            count++;
+                            let num = Math.floor(Math.random() * 90 + 3) + 33;
+                            if(num>=97 && num<=122)
+                            {
+                                ch = String.fromCharCode(num);
+                                result +=ch;
+                            }
+                            else
+                                count--;
+                        }
+                        break;
+                    case 2:
+                        if(checkboxs[2].checked)  // digit
+                        {
+                            let num = Math.floor(Math.random() * 90 + 3) + 33;
+                            count++;
+                            if(num>=48 && num<=57)
+                            {
+                                ch = String.fromCharCode(num);
+                                result +=ch;
+                            }
+                            else
+                                count--;
+                        }
+                        break;
+                    case 3:
+                        if(checkboxs[3].checked)  // special character
+                        {
+                            let num = Math.floor(Math.random() * 90 + 3) + 33;
+                            count++;
+                            if(!(num>=48 && num<=57) && !(num>=97 && num<=122) && !(num>=65 && num<=90))
+                            {
+                                ch = String.fromCharCode(num);
+                                result +=ch;
+                            }
+                            else
+                                count--;
+                        }
+                        break;
+                }
+            }
+            document.getElementById('result').innerHTML= result;
+        }
+    </script>
+</html>
